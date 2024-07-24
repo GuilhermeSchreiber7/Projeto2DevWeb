@@ -1,12 +1,10 @@
 <script setup>
-function EsconderPerfil() {
-    showprofile.value = false
-    form.value = true
-}
+defineProps(['dados']);
+
 </script>
 <template>
     <div>
-        <div id="infosEnviadas" v-show="showprofile">
+        <div id="infosEnviadas">
                     <h1>SEUS DADOS</h1>
                     <p>Nome: {{ dados.nome }}</p>
                     <p>Nascimento: {{ dados.nascimento }}</p>
@@ -18,7 +16,6 @@ function EsconderPerfil() {
                     <div class="Bio">
                         <p> Biografia: {{ dados.biografia }}</p>
                     </div>
-                    <button @click="EsconderPerfil()">Voltar</button>
                 </div>
     </div>
 </template>

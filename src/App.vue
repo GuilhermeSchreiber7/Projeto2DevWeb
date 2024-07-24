@@ -1,9 +1,9 @@
 <script setup>
-import { reactive } from 'vue';
-import Form from '@/components/Form.vue';
-import Infos from '@/components/Infos.vue';
+import { computed, reactive, ref } from 'vue';
+import Infos from '@/components/FormInfo.vue';
+import FormEdit from '@/components/FormEdit.vue';
 
-const dados = reactive({
+const perfil = reactive({
     nome: '',
     senha: '',
     confSenha: '',
@@ -16,18 +16,25 @@ const dados = reactive({
     linguagemProg: '',
     biografia: ''
 });
+const nomeBotao = computed(() => {
+   return botao.value ? 'Esconder' : 'Mostrar';
+});
+const botao = ref(false)
 
-function getPerfil(dados) {
-  console.log(dados);
-}
 
 </script>
 
 <template>
-   <div>
-    <Form :dados="dados" @mandar-perfil="getPerfil"/>
-    <Infos :dados="dados" />
-   </div>
+   <div v-if="!botao">
+    <form>
+    <FormEdit  :dados-edit="perfil"/>
+   <button v-if="perfil.senha ==perfil.confSenha && perfil.senha.length >= 8" @click="botao = !botao" type="submit">{{ nomeBotao }}</button>
+    </form>
+    </div>
+  <div v-if="botao">
+    <Infos :dados="perfil" />
+    <button  @click="botao = !botao">{{ nomeBotao }}</button>
+  </div>
 </template>
 
 <style scoped>
