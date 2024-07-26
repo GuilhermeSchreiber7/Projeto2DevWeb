@@ -3,32 +3,26 @@ import { computed, reactive, ref } from 'vue';
 import FormEdit from '@/components/FormEdit.vue';
 import FormInfo from '@/components/FormInfo.vue';
 
+const dados = ref('')
 
-const botao = ref(false);
-const perfil = reactive({
-  nome: '',
-  senha: '',
-  confSenha: '',
-  nascimento: '',
-  email: '',
-  cep: '',
-  cidade: '',
-  estado: '',
-  hobbies: [],
-  linguagemProg: '',
-  biografia: ''
-});
+function salvar(item){
+  console.log(item)
+  dados.value = item
+}
+
+const mostrarDados = computed(() => {
+  return dados.value !== ''
+})
 
 </script>
 
 <template>
   <div>
-    <div class="container2" v-if="botao">
-      <FormInfo :dados="dados-edit" />
-      <button @click="botao = !botao">{{ nomeBotao }}</button>
+    <div class="container2">
+      <FormEdit  @salvar="salvar" />
     </div>
-    <div class="containerApp" v-else>
-      <FormEdit  @salvar="botao= true" :dados-edit="perfil" />
+    <div class="containerApp">
+      <FormInfo v-if="mostrarDados" :dadosEdit="dados"   />
       
     </div>
   </div>

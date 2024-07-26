@@ -1,11 +1,7 @@
 <script setup>
+// cSpell
 import { ref, computed, reactive } from 'vue'
-defineProps({
-    dadosEdit: {
-        type: Object,
-        required: true
-    }
-})
+
 const emit = defineEmits(['salvar'])
 
 const perfil = reactive({
@@ -21,6 +17,7 @@ const perfil = reactive({
   linguagemProg: '',
   biografia: ''
 });
+
 const Estados = [
     { uf: 'AC', nome: 'Acre' },
     { uf: 'AL', nome: 'Alagoas' },
@@ -56,10 +53,11 @@ const nomeBotao = computed(() => {
     return botao.value ? 'Esconder' : 'Mostrar';
 });
 
-function enviar() {
+function enviar(dados) {
     //  validacoes
     // else
-    emit('salvar', {...perfil} )
+    
+    emit('salvar', dados )
 }
 
 </script>
@@ -67,7 +65,7 @@ function enviar() {
     <body class="background">
         <div class="containerForm">
             <main>
-                <form @submit.prevent="enviar">
+                <form @submit.prevent="">
                     <h1>SUAS INFORMAÇÕES</h1>
                     <div class="InputLabel">
                         <label for="inputName">Nome</label>
@@ -152,7 +150,7 @@ function enviar() {
                         <textarea type="text" id="bio" placeholder="Sua Biografia (opcional)"
                             v-model="perfil.biografia"></textarea>
                     </div>
-                    <button @click="enviar"
+                    <button @click="enviar(perfil)"
                         type="submit">{{ nomeBotao }}</button>
                 </form>
             </main>
