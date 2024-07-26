@@ -64,6 +64,7 @@ function enviar(dados) {
     <body class="background">
         <div class="containerForm">
             <main>
+                <form>
                     <h1>SUAS INFORMAÇÕES</h1>
                     <div class="InputLabel">
                         <label for="inputName">Nome</label>
@@ -149,7 +150,7 @@ function enviar(dados) {
                             v-model="perfil.biografia"></textarea>
                     </div>
                     <button @click="enviar(perfil)" type="submit">{{ nomeBotao }}</button>
-                    
+                </form>
             </main>
         </div>
     </body>
