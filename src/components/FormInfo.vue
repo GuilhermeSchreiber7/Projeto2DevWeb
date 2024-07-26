@@ -6,9 +6,6 @@ import { reactive } from 'vue'
         required: true
     }
 })
-
-console.log(props.dadosEdit)
-
 </script>
 <template>
     <div class="container">
@@ -19,7 +16,7 @@ console.log(props.dadosEdit)
             <p>Email: {{ props.dadosEdit.email }}</p>
             <p>Cidade: {{ props.dadosEdit.cidade }}</p>
             <p>Estado: {{ props.dadosEdit.estado }}</p>
-            <p>Hobbies: {{ props.dadosEdit.hobbies }}</p>
+            <p>Hobbies: {{ props.dadosEdit.hobbies.join(', ') }}</p>
             <p>Linguagem Preferida: {{ props.dadosEdit.linguagemProg }}</p>
             <div class="Bio">
             <p> Biografia: {{ props.dadosEdit.biografia }}</p>

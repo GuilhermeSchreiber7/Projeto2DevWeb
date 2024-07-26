@@ -6,7 +6,6 @@ import FormInfo from '@/components/FormInfo.vue';
 const dados = ref('')
 
 function salvar(item) {
-  console.log(item)
   dados.value = item
 }
 
@@ -36,9 +35,7 @@ const mostrarDados = computed(() => {
   padding: 0;
   box-sizing: border-box;
 }
-
 .containerApp {
-  background-image: linear-gradient(to right, #273cc1, #ffffff, rgb(14, 14, 159));
   height: 100%;
   width: 100%;
   display: flex;
@@ -53,7 +50,6 @@ const mostrarDados = computed(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to right, #273cc1, #ffffff, rgb(14, 14, 159));
   height: 100vh;
   width: 100vw;
 }

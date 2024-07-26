@@ -54,10 +54,9 @@ const nomeBotao = computed(() => {
 });
 
 function enviar(dados) {
-    //  validacoes
-    // else
     
-    emit('salvar', dados )
+    
+    emit('salvar', {...dados} )
 }
 
 </script>
@@ -65,7 +64,6 @@ function enviar(dados) {
     <body class="background">
         <div class="containerForm">
             <main>
-                <form @submit.prevent="">
                     <h1>SUAS INFORMAÇÕES</h1>
                     <div class="InputLabel">
                         <label for="inputName">Nome</label>
@@ -107,7 +105,7 @@ function enviar(dados) {
 
                         <select id="inputEstado" value="Estado" v-model="perfil.estado" required>
                             <option v-for="Estado of Estados" :key="Estado.uf" :value="Estado.uf">
-                                {{ Estado.nome }}
+                            {{ Estado.nome }}
                             </option>
                         </select>
                     </div>
@@ -142,7 +140,7 @@ function enviar(dados) {
                         <input type="radio" id="Py" value="Python" v-model="perfil.linguagemProg">
                         <label for="Py">Python</label>
 
-                        <input type="radio" id="C#" value="C#" v-model="perfil.LinguagemProg">
+                        <input type="radio" id="C#" value="Cs" v-model="perfil.linguagemProg">
                         <label for="C#">C#</label>
                     </div>
                     <div class="inputBio">
@@ -150,9 +148,8 @@ function enviar(dados) {
                         <textarea type="text" id="bio" placeholder="Sua Biografia (opcional)"
                             v-model="perfil.biografia"></textarea>
                     </div>
-                    <button @click="enviar(perfil)"
-                        type="submit">{{ nomeBotao }}</button>
-                </form>
+                    <button @click="enviar(perfil)" type="submit">{{ nomeBotao }}</button>
+                    
             </main>
         </div>
     </body>
@@ -164,11 +161,11 @@ function enviar(dados) {
     margin-top: 20px;
     border-radius: 10px;
     width: 70%;
-    margin: 0 auto;
     padding: 20px 100px;
     max-width: 500px;
     background: rgba(255, 255, 255, 0.5);
     font-family: "Roboto", sans-serif;
+    font-size: 20px;
     backdrop-filter: blur(10px);
     box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.048),
         0px 0px 3.2px rgba(0, 0, 0, 0.071),
@@ -190,20 +187,14 @@ main {
     width: 100%;
 }
 
-h1 {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-}
-
 .InputLabel {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
 }
 
 .InputLabel label {
     font-weight: bold;
+    padding: 10px;
 }
 
 .InputLabel input {
@@ -212,10 +203,13 @@ h1 {
     border: 1px solid #000;
 }
 
+#inputEstado{
+    height: 30px;
+}
+
 .titulo {
     display: flex;
     font-weight: bold;
-    justify-content: center;
 }
 
 .inputBio {
@@ -226,6 +220,8 @@ h1 {
 
 .inputBio label {
     font-weight: bold;
+    text-align: left;
+    padding: 10px 0px;
 }
 
 .inputBio textarea {
