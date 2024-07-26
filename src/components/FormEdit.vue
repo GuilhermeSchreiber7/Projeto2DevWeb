@@ -50,7 +50,7 @@ const Estados = [
 const botao = ref(false)
 
 const nomeBotao = computed(() => {
-    return botao.value ? 'Esconder' : 'Mostrar';
+    return botao.value ? 'Esconder' : 'MOSTRAR';
 });
 
 function enviar(dados) {
@@ -128,7 +128,7 @@ function enviar(dados) {
                         <input type="checkbox" id="hobbies5" value="VIdeoGame" v-model="perfil.hobbies">
                         <label for="hobbies5">Video Game</label>
                     </div>
-                    <div>
+                    <div class="linguagem">
                         <p class="titulo">Linguagem preferida:</p>
                         <input type="radio" id="Js" value="JavaScript" v-model="perfil.linguagemProg">
                         <label for="Js">JavaScript</label>
@@ -158,21 +158,17 @@ function enviar(dados) {
     </body>
 </template>
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 .containerForm {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-top: 20px;
     border-radius: 10px;
-    width: 40%;
+    width: 70%;
     margin: 0 auto;
-    padding: 10px 100px;
+    padding: 20px 100px;
     max-width: 500px;
     background: rgba(255, 255, 255, 0.5);
-    ;
-    font-family: "Poppins", sans-serif;
+    font-family: "Roboto", sans-serif;
     backdrop-filter: blur(10px);
     box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.048),
         0px 0px 3.2px rgba(0, 0, 0, 0.071),
@@ -197,6 +193,7 @@ main {
 h1 {
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
 }
 
 .InputLabel {
@@ -238,10 +235,13 @@ h1 {
     border-radius: 5px;
     border: 1px solid #000;
 }
-
-textarea {
-    resize: none;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}</style>
+button {
+  color: white;
+  font-weight: bold;
+  background-color: #0036be;
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  cursor: pointer;
+}
+</style>
