@@ -1,11 +1,26 @@
 <script setup>
-
+import { ref, computed, reactive } from 'vue'
 defineProps({
     dadosEdit: {
         type: Object,
         required: true
     }
 })
+const emit = defineEmits(['salvar'])
+
+const perfil = reactive({
+  nome: '',
+  senha: '',
+  confSenha: '',
+  nascimento: '',
+  email: '',
+  cep: '',
+  cidade: '',
+  estado: '',
+  hobbies: [],
+  linguagemProg: '',
+  biografia: ''
+});
 const Estados = [
     { uf: 'AC', nome: 'Acre' },
     { uf: 'AL', nome: 'Alagoas' },
@@ -35,95 +50,111 @@ const Estados = [
     { uf: 'SE', nome: 'Sergipe' },
     { uf: 'TO', nome: 'Tocantins' }
 ]
+const botao = ref(false)
+
+const nomeBotao = computed(() => {
+    return botao.value ? 'Esconder' : 'Mostrar';
+});
+
+function enviar() {
+    //  validacoes
+    // else
+    emit('salvar', {...perfil} )
+}
+
 </script>
 <template>
     <body class="background">
         <div class="containerForm">
             <main>
-                <h1>SUAS INFORMAÇÕES</h1>
-                <div class="InputLabel">
-                    <label for="inputName">Nome</label>
-                    <input type="text" v-model.trim="dadosEdit.nome" placeholder="Digite seu nome" id="inputName"
-                        required />
-                </div>
-                <div class="InputLabel">
-                    <label for="inputEmail">Email</label>
-                    <input id="inputEmail" type="email" v-model.trim="dadosEdit.email" placeholder="Digite seu email"
-                        required>
-                </div>
-                <div class="InputLabel">
-                    <label for="inputSenha">Senha (min.
-                        8 caracteres)</label>
-                    <input id="inputSenha" type="password" v-model.trim="dadosEdit.senha" placeholder="Digite sua Senha"
-                        required>
-                </div>
-                <div class="InputLabel">
-                    <label for="inputConfSenha">Confirmação de Senha</label>
-                    <input id="inputConfSenha" type="password" v-model.trim="dadosEdit.confSenha"
-                        placeholder="Confirme sua Senha" required>
-                </div>
-                <div class="InputLabel">
-                    <label for="inputAge">Nascimento</label>
-                    <input id="inputAge" type="date" v-model="dadosEdit.nascimento" placeholder="Digite sua Nascimento "
-                        required>
-                </div>
-                <div class="InputLabel">
-                    <label for="inputCEP">CEP</label>
-                    <input id="inputCEP" type="number" v-model="dadosEdit.cep" placeholder="Digite seu CEP" required>
-                </div>
-                <div class="InputLabel">
-                    <label for="inputCity">Cidade</label>
-                    <input id="inputCity" type="text" v-model="dadosEdit.cidade" placeholder="Digite sua Cidade"
-                        required>
-                </div>
-                <div class="InputLabel">
-                    <label for="inputEstado">Estado</label>
+                <form @submit.prevent="enviar">
+                    <h1>SUAS INFORMAÇÕES</h1>
+                    <div class="InputLabel">
+                        <label for="inputName">Nome</label>
+                        <input type="text" v-model.trim="perfil.nome" placeholder="Digite seu nome" id="inputName"
+                            required />
+                    </div>
+                    <div class="InputLabel">
+                        <label for="inputEmail">Email</label>
+                        <input id="inputEmail" type="email" v-model.trim="perfil.email" placeholder="Digite seu email"
+                            required>
+                    </div>
+                    <div class="InputLabel">
+                        <label for="inputSenha">Senha (min.
+                            8 caracteres)</label>
+                        <input id="inputSenha" type="password" v-model.trim="perfil.senha" placeholder="Digite sua Senha"
+                            required>
+                    </div>
+                    <div class="InputLabel">
+                        <label for="inputConfSenha">Confirmação de Senha</label>
+                        <input id="inputConfSenha" type="password" v-model.trim="perfil.confSenha"
+                            placeholder="Confirme sua Senha" required>
+                    </div>
+                    <div class="InputLabel">
+                        <label for="inputAge">Nascimento</label>
+                        <input id="inputAge" type="date" v-model="perfil.nascimento" placeholder="Digite sua Nascimento "
+                            required>
+                    </div>
+                    <div class="InputLabel">
+                        <label for="inputCEP">CEP</label>
+                        <input id="inputCEP" type="number" v-model="perfil.cep" placeholder="Digite seu CEP" required>
+                    </div>
+                    <div class="InputLabel">
+                        <label for="inputCity">Cidade</label>
+                        <input id="inputCity" type="text" v-model="perfil.cidade" placeholder="Digite sua Cidade"
+                            required>
+                    </div>
+                    <div class="InputLabel">
+                        <label for="inputEstado">Estado</label>
 
-                    <select id="inputEstado" value="Estado" v-model="dadosEdit.estado" required>
-                        <option v-for="Estado of Estados" :key="Estado.uf" :value="Estado.uf">
-                            {{ Estado.nome }}
-                        </option>
-                    </select>
-                </div>
-                <div>
-                    <p class="titulo">Hobbies:</p>
-                    <input type="checkbox" id="hobbies1" value="Esporte" v-model="dadosEdit.hobbies">
-                    <label for="hobbies1">Esportes</label>
+                        <select id="inputEstado" value="Estado" v-model="perfil.estado" required>
+                            <option v-for="Estado of Estados" :key="Estado.uf" :value="Estado.uf">
+                                {{ Estado.nome }}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <p class="titulo">Hobbies:</p>
+                        <input type="checkbox" id="hobbies1" value="Esporte" v-model="perfil.hobbies">
+                        <label for="hobbies1">Esportes</label>
 
-                    <input type="checkbox" id="hobbies2" value="Viagens" v-model="dadosEdit.hobbies">
-                    <label for="hobbies2">Viagens</label>
+                        <input type="checkbox" id="hobbies2" value="Viagens" v-model="perfil.hobbies">
+                        <label for="hobbies2">Viagens</label>
 
-                    <input type="checkbox" id="hobbies3" value="Música" v-model="dadosEdit.hobbies">
-                    <label for="hobbies3">Músicas</label>
+                        <input type="checkbox" id="hobbies3" value="Música" v-model="perfil.hobbies">
+                        <label for="hobbies3">Músicas</label>
 
-                    <input type="checkbox" id="hobbies4" value="Leitura" v-model="dadosEdit.hobbies">
-                    <label for="hobbies4">Leitura</label>
+                        <input type="checkbox" id="hobbies4" value="Leitura" v-model="perfil.hobbies">
+                        <label for="hobbies4">Leitura</label>
 
-                    <input type="checkbox" id="hobbies5" value="VIdeoGame" v-model="dadosEdit.hobbies">
-                    <label for="hobbies5">Video Game</label>
-                </div>
-                <div>
-                    <p class="titulo">Linguagem preferida:</p>
-                    <input type="radio" id="Js" value="JavaScript" v-model="dadosEdit.linguagemProg">
-                    <label for="Js">JavaScript</label>
+                        <input type="checkbox" id="hobbies5" value="VIdeoGame" v-model="perfil.hobbies">
+                        <label for="hobbies5">Video Game</label>
+                    </div>
+                    <div>
+                        <p class="titulo">Linguagem preferida:</p>
+                        <input type="radio" id="Js" value="JavaScript" v-model="perfil.linguagemProg">
+                        <label for="Js">JavaScript</label>
 
-                    <input type="radio" id="Java" value="Java" v-model="dadosEdit.linguagemProg">
-                    <label for="Java">Java</label>
+                        <input type="radio" id="Java" value="Java" v-model="perfil.linguagemProg">
+                        <label for="Java">Java</label>
 
-                    <input type="radio" id="C" value="C" v-model="dadosEdit.linguagemProg">
-                    <label for="C">C</label>
+                        <input type="radio" id="C" value="C" v-model="perfil.linguagemProg">
+                        <label for="C">C</label>
 
-                    <input type="radio" id="Py" value="Python" v-model="dadosEdit.linguagemProg">
-                    <label for="Py">Python</label>
+                        <input type="radio" id="Py" value="Python" v-model="perfil.linguagemProg">
+                        <label for="Py">Python</label>
 
-                    <input type="radio" id="C#" value="C#" v-model="dadosEdit.LinguagemProg">
-                    <label for="C#">C#</label>
-                </div>
-                <div class="inputBio">
-                    <label for="bio">Biografia</label>
-                    <textarea type="text" id="bio" placeholder="Sua Biografia (opcional)"
-                        v-model="dadosEdit.biografia"></textarea>
-                </div>
+                        <input type="radio" id="C#" value="C#" v-model="perfil.LinguagemProg">
+                        <label for="C#">C#</label>
+                    </div>
+                    <div class="inputBio">
+                        <label for="bio">Biografia</label>
+                        <textarea type="text" id="bio" placeholder="Sua Biografia (opcional)"
+                            v-model="perfil.biografia"></textarea>
+                    </div>
+                    <button @click="enviar"
+                        type="submit">{{ nomeBotao }}</button>
+                </form>
             </main>
         </div>
     </body>
@@ -140,59 +171,68 @@ const Estados = [
     width: 40%;
     margin: 0 auto;
     padding: 10px 100px;
-    max-width: 500px;   
-    background: rgba( 255, 255, 255, 0.5 );;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.5);
+    ;
     font-family: "Poppins", sans-serif;
     backdrop-filter: blur(10px);
-    box-shadow:   0px 0px 1.5px rgba(0, 0, 0, 0.048),
-  0px 0px 3.2px rgba(0, 0, 0, 0.071),
-  0px 0px 5.3px rgba(0, 0, 0, 0.088),
-  0px 0px 7.7px rgba(0, 0, 0, 0.102),
-  0px 0px 10.9px rgba(0, 0, 0, 0.115),
-  0px 0px 15.2px rgba(0, 0, 0, 0.128),
-  0px 0px 21.3px rgba(0, 0, 0, 0.142),
-  0px 0px 30.7px rgba(0, 0, 0, 0.159),
-  0px 0px 47.4px rgba(0, 0, 0, 0.182),
-  0px 0px 101px rgba(0, 0, 0, 0.23)
+    box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.048),
+        0px 0px 3.2px rgba(0, 0, 0, 0.071),
+        0px 0px 5.3px rgba(0, 0, 0, 0.088),
+        0px 0px 7.7px rgba(0, 0, 0, 0.102),
+        0px 0px 10.9px rgba(0, 0, 0, 0.115),
+        0px 0px 15.2px rgba(0, 0, 0, 0.128),
+        0px 0px 21.3px rgba(0, 0, 0, 0.142),
+        0px 0px 30.7px rgba(0, 0, 0, 0.159),
+        0px 0px 47.4px rgba(0, 0, 0, 0.182),
+        0px 0px 101px rgba(0, 0, 0, 0.23)
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
+
 h1 {
     font-size: 20px;
     font-weight: bold;
 }
+
 .InputLabel {
     display: flex;
     flex-direction: column;
     margin: 10px 0;
 }
+
 .InputLabel label {
     font-weight: bold;
 }
+
 .InputLabel input {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #000;
 }
+
 .titulo {
     display: flex;
     font-weight: bold;
     justify-content: center;
 }
+
 .inputBio {
     display: flex;
     flex-direction: column;
     margin: 10px 0;
 }
+
 .inputBio label {
     font-weight: bold;
 }
+
 .inputBio textarea {
     max-width: 300px;
     max-height: 200px;
@@ -200,10 +240,10 @@ h1 {
     border-radius: 5px;
     border: 1px solid #000;
 }
+
 textarea {
     resize: none;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
-</style>
+}</style>

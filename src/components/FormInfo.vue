@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from 'vue'
 defineProps(['dados']);
 
 </script>
@@ -6,15 +7,15 @@ defineProps(['dados']);
     <div class="container">
         <div id="infosEnviadas">
                     <h1>SEUS DADOS</h1>
-                    <p>Nome: {{ dados.nome }}</p>
-                    <p>Nascimento: {{ dados.nascimento }}</p>
-                    <p>Email: {{ dados.email }}</p>
-                    <p>Cidade: {{ dados.cidade }}</p>
-                    <p>Estado: {{ dados.estado }}</p>
-                    <p>Hobbies: {{ dados.hobbies.join(', ') }}</p>
-                    <p>Linguagem Preferida: {{ dados.linguagemProg }}</p>
+                    <p>Nome: {{ perfil.nome }}</p>
+                    <p>Nascimento: {{ perfil.nascimento }}</p>
+                    <p>Email: {{ perfil.email }}</p>
+                    <p>Cidade: {{ perfil.cidade }}</p>
+                    <p>Estado: {{ perfil.estado }}</p>
+                    <p>Hobbies: {{ perfil.hobbies.join(', ') }}</p>
+                    <p>Linguagem Preferida: {{ perfil.linguagemProg }}</p>
                     <div class="Bio">
-                        <p> Biografia: {{ dados.biografia }}</p>
+                        <p> Biografia: {{ perfil.biografia }}</p>
                     </div>
                 </div>
     </div>
