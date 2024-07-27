@@ -156,17 +156,14 @@ function enviar(dados) {
     </body>
 </template>
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 .containerForm {
     display: flex;
-    margin-top: 20px;
     border-radius: 10px;
     width: 70%;
     padding: 20px 100px;
-    max-width: 500px;
     background: rgba(255, 255, 255, 0.5);
     font-family: "Roboto", sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     backdrop-filter: blur(10px);
     box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.048),
         0px 0px 3.2px rgba(0, 0, 0, 0.071),
@@ -185,7 +182,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    
 }
 
 .InputLabel {
@@ -240,5 +237,6 @@ button {
   border-radius: 7px;
   padding: 10px;
   cursor: pointer;
+  margin: auto;
 }
 </style>
