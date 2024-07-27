@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from 'vue';
+import { computed,  ref } from 'vue';
 import FormEdit from '@/components/FormEdit.vue';
 import FormInfo from '@/components/FormInfo.vue';
 
@@ -22,7 +22,7 @@ const mostrarDados = computed(() => {
     </div>
     <div class="containerApp">
       <FormInfo v-if="mostrarDados" :dadosEdit="dados" />
-      
+
     </div>
   </main>
 </template>
