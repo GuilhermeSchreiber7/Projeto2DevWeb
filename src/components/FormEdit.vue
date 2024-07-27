@@ -54,9 +54,15 @@ const nomeBotao = computed(() => {
 });
 
 function enviar(dados) {
+
+    if (!dados.nome || !dados.senha || !dados.confSenha || !dados.nascimento || !dados.email || !dados.cep || !dados.cidade || !dados.estado || dados.hobbies.length === 0 || !dados.linguagemProg) {
+        alert('Preencha todos os campos obrigatórios')
+        return
+    }
+    else  emit('salvar', {...dados} )
     
-    
-    emit('salvar', {...dados} )
+   
+   
 }
 
 </script>
@@ -64,7 +70,7 @@ function enviar(dados) {
     <body class="background">
         <div class="containerForm">
             <main>
-                <form>
+                <div>
                     <h1>SUAS INFORMAÇÕES</h1>
                     <div class="InputLabel">
                         <label for="inputName">Nome</label>
@@ -150,7 +156,7 @@ function enviar(dados) {
                             v-model="perfil.biografia"></textarea>
                     </div>
                     <button @click="enviar(perfil)" type="submit">{{ nomeBotao }}</button>
-                </form>
+                </div>
             </main>
         </div>
     </body>
